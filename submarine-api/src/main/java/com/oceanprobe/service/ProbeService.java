@@ -11,6 +11,13 @@ public class ProbeService {
         this.probe.markAsVisited();
     }
 
+    private boolean isValidMove(int x, int y) {
+        if (x < 0 || y < 0 || x > probe.getMaxX() || y > probe.getMaxY()) return false;
+
+        // Check obstacle
+        return !probe.getObstacles().contains(x + "," + y);
+    }
+
     public void moveForward() {
         int x = probe.getX();
         int y = probe.getY();
@@ -28,7 +35,12 @@ public class ProbeService {
             case WEST:
                 if (x > 0) probe.setX(x - 1);
         }
-        probe.markAsVisited();
+//        probe.markAsVisited();
+        if (isValidMove(x, y)) {
+            probe.setX(x);
+            probe.setY(y);
+            probe.markAsVisited();
+        }
     }
 
     public void turnLeft() {
@@ -92,6 +104,11 @@ public class ProbeService {
             case WEST:
                 if (x < probe.getMaxX()) probe.setX(x + 1);
         }
-        probe.markAsVisited();
+//        probe.markAsVisited();
+        if (isValidMove(x, y)) {
+            probe.setX(x);
+            probe.setY(y);
+            probe.markAsVisited();
+        }
     }
 }

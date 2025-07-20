@@ -68,12 +68,12 @@ public class ProbeServiceTest {
 
     @Test
     void testVisitedCoordinatesAfterMoves() {
-        Probe probe = new Probe(0, 0, Direction.NORTH, 5, 5, new LinkedHashSet<>());
-        ProbeService service = new ProbeService(probe);
+        Probe probe = new Probe(0, 0, Direction.NORTH, 5, 5);
+        ProbeService probeService = new ProbeService(probe);
 
-        service.moveForward();  // (0,1)
-        service.turnRight();    // EAST
-        service.moveForward();  // (1,1)
+        probeService.moveForward();  // (0,1)
+        probeService.turnRight();    // EAST
+        probeService.moveForward();  // (1,1)
 
         Set<String> visited = probe.getVisited();
 
@@ -82,5 +82,19 @@ public class ProbeServiceTest {
         assertTrue(visited.contains("(1,1)"));
         assertEquals(3, visited.size());
     }
+
+    @Test
+    void testAvoidObstacle() {
+        Probe probe = new Probe(0, 0, Direction.NORTH, 5, 5);
+        probe.addObstacle(0, 1);  // Obstacle directly in front
+
+        ProbeService probeService = new ProbeService(probe);
+
+        probeService.moveForward();  // Should not move
+        probeService.moveBackward();
+        assertEquals(0, probe.getX());
+        assertEquals(0, probe.getY());
+    }
+
 
 }
