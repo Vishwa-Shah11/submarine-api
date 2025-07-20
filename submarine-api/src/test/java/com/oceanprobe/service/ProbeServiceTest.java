@@ -29,4 +29,14 @@ public class ProbeServiceTest {
 
         assertEquals(Direction.WEST, probe.getDirection());
     }
+
+    @Test
+    void turnRightFromNorth() {
+        Probe probe = new Probe(0, 0, Direction.NORTH);
+        ProbeService probeService = new ProbeService(probe);
+
+        probeService.turnRight();
+
+        assertEquals(Direction.EAST, probe.getDirection());
+    }
 }

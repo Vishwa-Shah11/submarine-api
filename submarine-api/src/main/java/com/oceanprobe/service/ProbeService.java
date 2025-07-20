@@ -50,4 +50,27 @@ public class ProbeService {
         }
         probe.setDirection(newDirection);
     }
+
+    public void turnRight() {
+        Direction current = probe.getDirection();
+        Direction newDirection;
+
+        switch (current) {
+            case NORTH:
+                newDirection = Direction.EAST;
+                break;
+            case EAST:
+                newDirection = Direction.SOUTH;
+                break;
+            case SOUTH:
+                newDirection = Direction.WEST;
+                break;
+            case WEST:
+                newDirection = Direction.NORTH;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + current);
+        }
+        probe.setDirection(newDirection);
+    }
 }
