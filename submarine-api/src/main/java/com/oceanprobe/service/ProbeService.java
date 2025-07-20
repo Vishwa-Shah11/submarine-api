@@ -73,4 +73,22 @@ public class ProbeService {
         }
         probe.setDirection(newDirection);
     }
+
+    public void moveBackward() {
+        int x = probe.getX();
+        int y = probe.getY();
+        switch (probe.getDirection()) {
+            case NORTH:
+                probe.setY(y - 1);
+                break;
+            case EAST:
+                probe.setX(x - 1);
+                break;
+            case SOUTH:
+                probe.setY(y + 1);
+                break;
+            case WEST:
+                probe.setX(x + 1);
+        }
+    }
 }

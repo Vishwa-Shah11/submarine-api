@@ -39,4 +39,15 @@ public class ProbeServiceTest {
 
         assertEquals(Direction.EAST, probe.getDirection());
     }
+
+    @Test
+    void testMoveBackwardsWhenFacingNorth() {
+        Probe probe = new Probe(0, 1, Direction.NORTH);
+        ProbeService probeService = new ProbeService(probe);
+
+        probeService.moveBackward();
+
+        assertEquals(0, probe.getX());
+        assertEquals(0, probe.getY());
+    }
 }
