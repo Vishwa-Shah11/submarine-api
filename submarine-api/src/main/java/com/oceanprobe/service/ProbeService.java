@@ -16,16 +16,16 @@ public class ProbeService {
 
         switch (probe.getDirection()) {
             case NORTH:
-                probe.setY(y + 1);
+                if (y < probe.getMaxY()) probe.setY(y + 1);
                 break;
             case EAST:
-                probe.setX(x + 1);
+                if (x < probe.getMaxX()) probe.setX(x + 1);
                 break;
             case SOUTH:
-                probe.setY(y - 1);
+                if (y > 0) probe.setY(y - 1);
                 break;
             case WEST:
-                probe.setX(x - 1);
+                if (x > 0) probe.setX(x - 1);
         }
     }
 
@@ -79,16 +79,16 @@ public class ProbeService {
         int y = probe.getY();
         switch (probe.getDirection()) {
             case NORTH:
-                probe.setY(y - 1);
+                if (y > 0) probe.setY(y - 1);
                 break;
             case EAST:
-                probe.setX(x - 1);
+                if (x > 0) probe.setX(x - 1);
                 break;
             case SOUTH:
-                probe.setY(y + 1);
+                if (y < probe.getMaxY()) probe.setY(y + 1);
                 break;
             case WEST:
-                probe.setX(x + 1);
+                if (x < probe.getMaxX()) probe.setX(x + 1);
         }
     }
 }

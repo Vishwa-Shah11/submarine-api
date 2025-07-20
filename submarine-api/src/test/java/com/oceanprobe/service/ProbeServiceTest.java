@@ -10,7 +10,7 @@ public class ProbeServiceTest {
 
     @Test
     void testMoveForwardWhenFacingNorth() {
-        Probe probe = new Probe(0, 0, Direction.NORTH);
+        Probe probe = new Probe(0, 0, Direction.NORTH, 5, 5);
         ProbeService probeService = new ProbeService(probe);
 
         probeService.moveForward();
@@ -22,7 +22,7 @@ public class ProbeServiceTest {
 
     @Test
     void testTurnLeftFromNorth() {
-        Probe probe = new Probe(0, 0, Direction.NORTH);
+        Probe probe = new Probe(0, 0, Direction.NORTH, 5, 5);
         ProbeService probeService = new ProbeService(probe);
 
         probeService.turnLeft();
@@ -32,7 +32,7 @@ public class ProbeServiceTest {
 
     @Test
     void turnRightFromNorth() {
-        Probe probe = new Probe(0, 0, Direction.NORTH);
+        Probe probe = new Probe(0, 0, Direction.NORTH, 5, 5);
         ProbeService probeService = new ProbeService(probe);
 
         probeService.turnRight();
@@ -42,12 +42,24 @@ public class ProbeServiceTest {
 
     @Test
     void testMoveBackwardsWhenFacingNorth() {
-        Probe probe = new Probe(0, 1, Direction.NORTH);
+        Probe probe = new Probe(0, 1, Direction.NORTH, 5, 5);
         ProbeService probeService = new ProbeService(probe);
 
         probeService.moveBackward();
 
         assertEquals(0, probe.getX());
         assertEquals(0, probe.getY());
+    }
+
+    @Test
+    void testMoveForwardBlockedByGridBoundry() {
+        Probe probe = new Probe(0, 5, Direction.NORTH, 5, 5);
+        ProbeService probeService = new ProbeService(probe);
+
+        probeService.moveForward();
+
+        assertEquals(0, probe.getX());
+        assertEquals(5, probe.getY());
+        assertEquals(Direction.NORTH, probe.getDirection());
     }
 }
