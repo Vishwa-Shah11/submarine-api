@@ -4,7 +4,8 @@ import com.oceanprobe.enums.Direction;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -16,4 +17,18 @@ public class Probe {
 
     private int maxX;
     private int maxY;
+
+    public Probe(int x, int y, Direction direction, int maxX, int maxY) {
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
+        this.maxX = maxX;
+        this.maxY = maxY;
+    }
+
+    private Set<String> visited = new LinkedHashSet<>();
+
+    public void markAsVisited() {
+        visited.add("("+ x + "," + y + ")");
+    }
 }

@@ -8,6 +8,7 @@ public class ProbeService {
 
     public ProbeService(Probe probe) {
         this.probe = probe;
+        this.probe.markAsVisited();
     }
 
     public void moveForward() {
@@ -27,6 +28,7 @@ public class ProbeService {
             case WEST:
                 if (x > 0) probe.setX(x - 1);
         }
+        probe.markAsVisited();
     }
 
     public void turnLeft() {
@@ -90,5 +92,6 @@ public class ProbeService {
             case WEST:
                 if (x < probe.getMaxX()) probe.setX(x + 1);
         }
+        probe.markAsVisited();
     }
 }

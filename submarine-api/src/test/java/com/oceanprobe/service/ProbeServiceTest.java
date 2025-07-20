@@ -4,6 +4,9 @@ import com.oceanprobe.enums.Direction;
 import com.oceanprobe.model.Probe;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProbeServiceTest {
@@ -62,4 +65,22 @@ public class ProbeServiceTest {
         assertEquals(5, probe.getY());
         assertEquals(Direction.NORTH, probe.getDirection());
     }
+
+    @Test
+    void testVisitedCoordinatesAfterMoves() {
+        Probe probe = new Probe(0, 0, Direction.NORTH, 5, 5, new LinkedHashSet<>());
+        ProbeService service = new ProbeService(probe);
+
+        service.moveForward();  // (0,1)
+        service.turnRight();    // EAST
+        service.moveForward();  // (1,1)
+
+        Set<String> visited = probe.getVisited();
+
+        assertTrue(visited.contains("(0,0)"));
+        assertTrue(visited.contains("(0,1)"));
+        assertTrue(visited.contains("(1,1)"));
+        assertEquals(3, visited.size());
+    }
+
 }
