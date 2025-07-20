@@ -1,5 +1,6 @@
 package com.oceanprobe.service;
 
+import com.oceanprobe.enums.Direction;
 import com.oceanprobe.model.Probe;
 
 public class ProbeService {
@@ -26,5 +27,27 @@ public class ProbeService {
             case WEST:
                 probe.setX(x - 1);
         }
+    }
+
+    public void turnLeft() {
+        Direction current = probe.getDirection();
+        Direction newDirection;
+
+        switch (current) {
+            case NORTH:
+                newDirection = Direction.WEST;
+                break;
+            case EAST:
+                newDirection = Direction.NORTH;
+                break;
+            case SOUTH:
+                newDirection = Direction.EAST;
+                break;
+            case WEST:
+                newDirection = Direction.SOUTH;
+            default:
+                throw new IllegalStateException("Unexpected value: " + current);
+        }
+        probe.setDirection(newDirection);
     }
 }
