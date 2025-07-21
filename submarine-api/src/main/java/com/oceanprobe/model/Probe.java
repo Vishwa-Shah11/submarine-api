@@ -34,10 +34,6 @@ public class Probe {
         this.obstacles = new HashSet<>();
     }
 
-//    public Probe(int x, int y, Direction direction, int maxX, int maxY, Object o) {
-//        this(x, y, direction, maxX, maxY);
-//    }
-
     public void markAsVisited() {
         visited.add("("+ x + "," + y + ")");
     }

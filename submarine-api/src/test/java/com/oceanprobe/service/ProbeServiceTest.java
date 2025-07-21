@@ -96,5 +96,21 @@ public class ProbeServiceTest {
         assertEquals(0, probe.getY());
     }
 
+    @Test
+    void testProcessCommands() {
+        Probe probe = new Probe(0, 0, Direction.NORTH, 5, 5);
+        ProbeService probeService = new ProbeService(probe);
+        probeService.processCommands("FFRFF");
+
+        assertEquals(2, probe.getX());
+        assertEquals(2, probe.getY());
+        assertEquals(Direction.EAST, probe.getDirection());
+        assertTrue(probe.getVisited().contains("(0,0)"));
+        assertTrue(probe.getVisited().contains("(0,1)"));
+        assertTrue(probe.getVisited().contains("(0,2)"));
+        assertTrue(probe.getVisited().contains("(1,2)"));
+        assertTrue(probe.getVisited().contains("(2,2)"));
+    }
+
 
 }

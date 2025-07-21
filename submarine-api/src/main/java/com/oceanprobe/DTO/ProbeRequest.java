@@ -14,5 +14,5 @@ public class ProbeRequest {
     private int maxX;
     private int maxY;
     private List<String> obstacles;
-    private String commands; // e.g., "FFRFLB"
+    private String commands;
 }

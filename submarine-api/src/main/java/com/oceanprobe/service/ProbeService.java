@@ -114,7 +114,7 @@ public class ProbeService {
 
     public void processCommands(String commands) {
         for (char command : commands.toCharArray()) {
-            System.out.println("Executing command: " + command);
+//            System.out.println("Executing command: " + command);
             switch (command) {
                 case 'F' -> moveForward();
                 case 'B' -> moveBackward();
@@ -122,7 +122,7 @@ public class ProbeService {
                 case 'R' -> turnRight();
                 default -> throw new IllegalArgumentException("Invalid command: " + command);
             }
-            System.out.println("Current position: (" + probe.getX() + "," + probe.getY() + ") facing " + probe.getDirection());
+//            System.out.println("Current position: (" + probe.getX() + "," + probe.getY() + ") facing " + probe.getDirection());
         }
     }
 
