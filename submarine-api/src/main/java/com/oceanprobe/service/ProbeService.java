@@ -19,26 +19,26 @@ public class ProbeService {
     }
 
     public void moveForward() {
-        int x = probe.getX();
-        int y = probe.getY();
+        int nextX = probe.getX();
+        int nextY = probe.getY();
 
         switch (probe.getDirection()) {
             case NORTH:
-                if (y < probe.getMaxY()) probe.setY(y + 1);
+                nextY++;
                 break;
             case EAST:
-                if (x < probe.getMaxX()) probe.setX(x + 1);
+                nextX++;
                 break;
             case SOUTH:
-                if (y > 0) probe.setY(y - 1);
+                nextY--;
                 break;
             case WEST:
-                if (x > 0) probe.setX(x - 1);
+                nextX--;
         }
 //        probe.markAsVisited();
-        if (isValidMove(x, y)) {
-            probe.setX(x);
-            probe.setY(y);
+        if (isValidMove(nextX, nextY)) {
+            probe.setX(nextX);
+            probe.setY(nextY);
             probe.markAsVisited();
         }
     }
@@ -89,26 +89,41 @@ public class ProbeService {
     }
 
     public void moveBackward() {
-        int x = probe.getX();
-        int y = probe.getY();
+        int nextX = probe.getX();
+        int nextY = probe.getY();
         switch (probe.getDirection()) {
             case NORTH:
-                if (y > 0) probe.setY(y - 1);
+                nextY--;
                 break;
             case EAST:
-                if (x > 0) probe.setX(x - 1);
+                nextX--;
                 break;
             case SOUTH:
-                if (y < probe.getMaxY()) probe.setY(y + 1);
+                nextY++;
                 break;
             case WEST:
-                if (x < probe.getMaxX()) probe.setX(x + 1);
+                nextX++;
         }
 //        probe.markAsVisited();
-        if (isValidMove(x, y)) {
-            probe.setX(x);
-            probe.setY(y);
+        if (isValidMove(nextX, nextY)) {
+            probe.setX(nextX);
+            probe.setY(nextY);
             probe.markAsVisited();
         }
     }
+
+    public void processCommands(String commands) {
+        for (char command : commands.toCharArray()) {
+            System.out.println("Executing command: " + command);
+            switch (command) {
+                case 'F' -> moveForward();
+                case 'B' -> moveBackward();
+                case 'L' -> turnLeft();
+                case 'R' -> turnRight();
+                default -> throw new IllegalArgumentException("Invalid command: " + command);
+            }
+            System.out.println("Current position: (" + probe.getX() + "," + probe.getY() + ") facing " + probe.getDirection());
+        }
+    }
+
 }
